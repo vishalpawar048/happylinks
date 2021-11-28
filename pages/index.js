@@ -4,6 +4,7 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import Link from "next/link";
 import Date from "../components/date";
+import Banner from "../components/banners";
 
 export default function Home({ allPostsData }) {
   return (
@@ -12,19 +13,19 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
+        <p>Wish them in 3D</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <Link href={`/models/love/love`}>
+          <a>
+            Hello
+            {/* <Banner></Banner> */}
+          </a>
+        </Link>
+
         <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
+        {/* <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
-            // <li className={utilStyles.listItem} key={id}>
-            //   {title}
-            //   <br />
-            //   {id}
-            //   <br />
-            //   {date}
-            // </li>
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>
@@ -35,7 +36,7 @@ export default function Home({ allPostsData }) {
               </small>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </section>
     </Layout>
   );
@@ -43,6 +44,7 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
+  console.log(">>>>>allPostsData", allPostsData);
   return {
     props: {
       allPostsData,
