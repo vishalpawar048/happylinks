@@ -4,6 +4,7 @@
 
 import * as THREE from "three";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 // import { FontLoader } from "../node_modules/three/examples/jsm/loaders/FontLoader";
 // import { GUI } from "three/examples/jsm/libs/dat.gui.module";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -24,43 +25,30 @@ import TextMsg from "./loveComponents/Text";
 // import CharacterControls from "../../../components/loveComponents/components/Character";
 // import MaleCharacter from "./assets/MaleCharacter.glb";
 import { KeyDisplay } from "./loveComponents/utils";
+import { getExperiences, saveExperiences } from "../../../service/experience";
+import Modifier from "./Modifier";
 
-function Love() {
+function Love({ fromExperience, messege }) {
   // const gui = new GUI();
-  // useEffect(() => {
-  //   const canvas = document.querySelector("#canvas");
-  //   const renderer = new THREE.WebGLRenderer({ canvas });
+  console.log(
+    "---->>>>>>love",
+    messege ? messege : "Happy Birthday Sweetheart..."
+  );
 
-  //   const fov = 75;
-  //   const aspect = 2; // the canvas default
-  //   const near = 0.1;
-  //   const far = 5;
-  //   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  //   camera.position.z = 2;
+  const [msg, setmsg] = useState(messege ? messege : "");
+  const [finalMsg, setfinalMsg] = useState(
+    messege ? messege : "Happy Birthday Sweetheart..."
+  );
+  const [urlToShare, setUrlToShare] = useState("");
+  const [experienceId, setExperienceId] = useState("");
 
-  //   const scene = new THREE.Scene();
-
-  //   // const boxWidth = 1;
-  //   // const boxHeight = 1;
-  //   // const boxDepth = 1;
-  //   // const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-
-  //   // const material = new THREE.MeshBasicMaterial({ color: 0x44aa88 }); // greenish blue
-
-  //   // const cube = new THREE.Mesh(geometry, material);
-  //   Particles(THREE, scene, renderer, camera);
-  //   // Skybox(THREE, scene);
-  //   // scene.add(cube);
-
-  //   renderer.render(scene, camera);
-  // }, []);
+  console.log(">>>>>>>finalMsg", finalMsg);
 
   useEffect(() => {
     var w = window.innerWidth;
     var h = window.innerHeight;
-
     const canvas = document.querySelector("#canvas");
-    console.log(">>>.>>..", canvas);
+
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.outputEncoding = THREE.sRGBEncoding;
 
@@ -97,61 +85,41 @@ function Love() {
     // Plane(THREE, scene);
     Particles(THREE, scene, renderer, camera);
     Skybox(THREE, scene);
-
+    if (messege) {
+      setfinalMsg(messege);
+    }
+    TextMsg(THREE, scene, finalMsg);
     // const loader = new GLTFLoader(loadingManager);
 
-    // loader.load(
-    //   heart,
-    //   function (gltf) {
-    //     let model = gltf.scene;
-    //     model.position.set(0, -5, 0);
-    //     renderer.outputEncoding = true;
-    //     gltf.scene.scale.set(100, 100, 100);
-    //     // const listener = new THREE.AudioListener();
-    //     // camera.add(listener);
-    //     scene.add(model);
-    //     heartMixer = new THREE.AnimationMixer(model);
-    //     heartMixer.clipAction(gltf.animations[0]).play();
-    //     // addDonald();
-    //     // addPlane();
-    //     render();
-    //   },
-    //   function (progress) {
-    //     // console.log("% loaded", xhr);
-    //   },
-    //   function (error) {
-    //     console.log("error");
-    //   }
-    // );
+    const loader = new GLTFLoader();
+
+    loader.load(
+      "/assets/love/heart.glb",
+      function (gltf) {
+        let model = gltf.scene;
+        model.position.set(0, -5, 0);
+        renderer.outputEncoding = true;
+        gltf.scene.scale.set(100, 100, 100);
+        // const listener = new THREE.AudioListener();
+        // camera.add(listener);
+        scene.add(model);
+        heartMixer = new THREE.AnimationMixer(model);
+        heartMixer.clipAction(gltf.animations[0]).play();
+        // addDonald();
+        // addPlane();
+        render();
+      },
+      function (progress) {
+        // console.log("% loaded", xhr);
+      },
+      function (error) {
+        console.log("error");
+      }
+    );
 
     const light = new THREE.PointLight(0xff0000, 1, 100);
     light.position.set(5, 5, 0);
     scene.add(light);
-
-    let addDonald = () => {
-      loader.load(
-        donald,
-        function (gltf) {
-          let model = gltf.scene;
-          model.position.set(0, -10, 0);
-          model.rotation.set(0, 1.5, 0);
-          scene.add(model);
-          donaldDanceMixer = new THREE.AnimationMixer(model);
-
-          donaldDanceMixer.clipAction(gltf.animations[0]).play();
-          render();
-        },
-        function (progress) {
-          // console.log("% loaded", xhr);
-        },
-        function (error) {
-          console.log(error);
-        }
-      );
-    };
-
-    // MODEL WITH ANIMATIONS
-    var characterControls;
 
     const clock = new THREE.Clock();
     const render = () => {
@@ -168,9 +136,6 @@ function Love() {
         heartMixer.update(delta * 0.25);
       }
 
-      if (characterControls) {
-        characterControls(delta, keysPressed);
-      }
       orbitControls.update();
       renderer.render(scene, camera);
       window.requestAnimationFrame(render);
@@ -192,7 +157,19 @@ function Love() {
       return needResize;
     }
     render();
-  }, []);
+  }, [finalMsg, messege]);
+
+  function applyText(msg) {
+    console.log("value---", msg);
+    setfinalMsg(msg);
+  }
+
+  async function save() {
+    let id = await saveExperiences(msg, "love");
+    setExperienceId(id);
+    setUrlToShare(`${window.location.href}/experience/${id}`);
+    console.log("process.env.PUBLIC_URL", window.location.href, id);
+  }
 
   let canvasStyle = {
     width: "100%",
@@ -202,12 +179,18 @@ function Love() {
   };
   return (
     <div className="love">
-      <canvas
-        id="canvas"
-        style={canvasStyle}
-        // width={640}
-        // height={425}
-      />
+      <canvas id="canvas" style={canvasStyle} />
+
+      {fromExperience ? null : (
+        <Modifier
+          applyText={applyText}
+          save={save}
+          msg={msg}
+          setmsg={setmsg}
+          urlToShare={urlToShare}
+          experienceId={experienceId}
+        ></Modifier>
+      )}
     </div>
   );
 }

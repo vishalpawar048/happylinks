@@ -1,9 +1,9 @@
 import FullScreen from "./FullScreen";
-import audioFile from "../models/Audio/happyBirthday.mp3";
-const startButton = document.getElementById("startButton");
-const canvas = document.querySelector("#canvas");
+// import audioFile from "../models/Audio/happyBirthday.mp3";
+// const startButton = document.getElementById("startButton");
+// const canvas = document.querySelector("#canvas");
 startButton.addEventListener("click", function () {
-  let audio = new Audio(audioFile);
+  let audio = new Audio("/assets/Audio/happyBirthday.mp3");
   audio
     .play()
     .then((res) => {

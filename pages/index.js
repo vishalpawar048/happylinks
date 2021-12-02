@@ -16,7 +16,7 @@ export default function Home({ allPostsData }) {
         <p>Wish them in 3D</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <Link href={`/models/love/love`}>
+        <Link href={`/models/love/`}>
           <a>
             Hello
             {/* <Banner></Banner> */}
@@ -44,7 +44,7 @@ export default function Home({ allPostsData }) {
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
-  console.log(">>>>>allPostsData", allPostsData);
+
   return {
     props: {
       allPostsData,
