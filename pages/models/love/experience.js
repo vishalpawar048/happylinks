@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Love from "./index";
+import Scene from "./scene";
 import { useRouter } from "next/router";
 import { set } from "date-fns";
 import { getExperiences } from "../../../service/experience";
@@ -21,5 +21,5 @@ export default function Experience() {
     }
     getExperiencesData(id);
   }, [id]);
-  return <Love fromExperience={true} messege={messege}></Love>;
+  return <Scene fromExperience={true} messege={messege}></Scene>;
 }

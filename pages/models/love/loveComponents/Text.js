@@ -6,7 +6,7 @@ export default function TextMsg(THREE, scene, msg) {
 
   fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
     // Material
-    console.log("--------font", font);
+    // console.log("--------font", font);
     const matDark = new THREE.LineBasicMaterial({
       color: "red",
       side: THREE.DoubleSide,

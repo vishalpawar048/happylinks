@@ -6,7 +6,7 @@ import Link from "next/link";
 import Date from "../components/date";
 import Banner from "../components/banners";
 
-export default function Home({ allPostsData }) {
+export default function Home() {
   return (
     <Layout home>
       <Head>
@@ -16,7 +16,7 @@ export default function Home({ allPostsData }) {
         <p>Wish them in 3D</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <Link href={`/models/love/`}>
+        <Link href={`/models/love/  `}>
           <a>
             Hello
             {/* <Banner></Banner> */}

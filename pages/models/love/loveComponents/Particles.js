@@ -2,7 +2,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // import snowImg from "/snow.png";
 // import heart from "/public/heart.png";
 
-export default function Particles(THREE, scene, renderer, camera) {
+export default function Particles(THREE) {
   //Snow
 
   const partclesGeometry = new THREE.BufferGeometry();
@@ -55,26 +55,19 @@ export default function Particles(THREE, scene, renderer, camera) {
     new THREE.BufferAttribute(heartsPosArray, 3)
   );
   const heartMesh = new THREE.Points(heartGeometry, heartMaterial);
-  const material = new THREE.PointsMaterial({
-    size: 0.005,
-  });
-  // Heart
-  const geometry = new THREE.TorusGeometry(0.7, 0.2, 16, 100);
-  // Materials
-  // Mesh
-  const sphere = new THREE.Points(geometry, material);
-  scene.add(partclesMesh, heartMesh);
-  /**
-   * Animate
-   */
-  const clock = new THREE.Clock();
-  const tick = () => {
-    const elapsedTime = clock.getElapsedTime();
-    // sphere.rotation.y = 0.5 * elapsedTime;
-    partclesMesh.position.y = -elapsedTime;
-    heartMesh.position.y = -elapsedTime;
-    renderer.render(scene, camera);
-    window.requestAnimationFrame(tick);
-  };
-  tick();
+  return { partclesMesh, heartMesh };
+  // scene.add(partclesMesh, heartMesh);
+  // /**
+  //  * Animate
+  //  */
+  // const clock = new THREE.Clock();
+  // const tick = () => {
+  //   const elapsedTime = clock.getElapsedTime();
+  //   // sphere.rotation.y = 0.5 * elapsedTime;
+  //   partclesMesh.position.y = -elapsedTime;
+  //   heartMesh.position.y = -elapsedTime;
+  //   renderer.render(scene, camera);
+  //   window.requestAnimationFrame(tick);
+  // };
+  // messege && tick();
 }
