@@ -1,39 +1,85 @@
-import React from 'react';
-import _ from 'lodash';
+import React from "react";
 
-import { htmlToReact } from '../utils';
-import ActionLink from './ActionLink';
-import Action from './Action';
+const Footer = (props) => {
+  return (
+    <>
+      <footer className="footer section">
+        <div className="footer__container container grid">
+          <div>
+            <a href="#" className="footer__logo">
+              <img
+                src="assets/img/logo.png"
+                alt=""
+                className="footer__logo-img"
+              />
+              Christmas
+            </a>
+            <p className="footer__description">
+              This Christmas give <br /> a lot of love
+            </p>
+          </div>
+          <div>
+            <h3 className="footer__title">Our Services</h3>
+            <ul className="footer__links">
+              <li>
+                <a href="#" className="footer__link">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="#" className="footer__link">
+                  Discounts
+                </a>
+              </li>
+              <li>
+                <a href="#" className="footer__link">
+                  Shipping mode
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="footer__title">Support</h3>
+            <ul className="footer__links">
+              <li>
+                <a href="#" className="footer__link">
+                  FAQs
+                </a>
+              </li>
+              <li>
+                <a href="#" className="footer__link">
+                  Support center
+                </a>
+              </li>
+              <li>
+                <a href="#" className="footer__link">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="footer__title">Available On</h3>
+            <div className="footer__aviables">
+              <img
+                src="assets/img/aviable1.png"
+                alt=""
+                className="footer__aviable-img"
+              />
+              <img
+                src="assets/img/aviable2.png"
+                alt=""
+                className="footer__aviable-img"
+              />
+            </div>
+          </div>
+          <img src="assets/img/footer1.png" alt="" className="footer__img1" />
+          <img src="assets/img/footer2.png" alt="" className="footer__img2" />
+        </div>
+        <span className="footer__copy">© Bedimcode. All rigths reserved</span>
+      </footer>
+    </>
+  );
+};
 
-export default class Footer extends React.Component {
-    render() {
-        const config = _.get(this.props, 'config');
-        const footer = _.get(config, 'footer');
-        const copyright = _.get(footer, 'content');
-        const links = _.get(footer, 'links');
-        const hasSocial = _.get(footer, 'has_social');
-        const socialLinks = _.get(footer, 'social_links');
-
-        return (
-            <footer id="colophon" className="site-footer">
-                <div className="container container--lg">
-                    <div className="site-footer__inside">
-                        <div className="site-footer__info">
-                            {copyright && <span className="site-footer__copyright">{htmlToReact(copyright)}</span>}
-                            {_.map(links, (action, index) => (
-                                <ActionLink key={index} action={action} />
-                            ))}
-                        </div>
-                        {hasSocial && !_.isEmpty(socialLinks) && (
-                            <div className="site-footer__social">
-                                {_.map(socialLinks, (action, index) => (
-                                    <Action key={index} action={action} />
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </footer>
-        );
-    }
-}
+export default Footer;
