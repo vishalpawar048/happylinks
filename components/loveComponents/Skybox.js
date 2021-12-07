@@ -1,9 +1,4 @@
-// import posx from "../assets/Skyboxs/posx.jpg";
-// import negx from "../assets/Skyboxs/negx.jpg";
-// import posy from "../assets/Skyboxs/posy.jpg";
-// import negy from "../assets/Skyboxs/negy.jpg";
-// import posz from "../assets/Skyboxs/posz.jpg";
-// import negz from "../assets/Skyboxs/negz.jpg";
+
 import loadingManager from "./Loader";
 
 export default function Skybox(THREE, scene) {

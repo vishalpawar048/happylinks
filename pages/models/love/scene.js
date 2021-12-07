@@ -10,18 +10,16 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 // import cake from "./assets/cake3d.glb";
 // import donald from "./assets/donald.glb";
 // import plane from "./assets/plane.glb";
-import Particles from "./loveComponents/Particles";
-import Skybox from "./loveComponents/Skybox";
+import Particles from "../../../components/loveComponents/Particles";
+import Skybox from "../../../components/loveComponents/Skybox";
 // import heart from "./assets/heart.glb";
-import Plane from "./loveComponents/Plane";
+import Plane from "../../../components/loveComponents/Plane";
 // import Drawer from "./components/Drawer";
-import TextMsg from "./loveComponents/Text";
+import TextMsg from "../../../components/loveComponents/Text";
 // import loadingManager from "./components/Loader";
 
 // import CharacterControls from "../../../components/loveComponents/components/Character";
 // import MaleCharacter from "./assets/MaleCharacter.glb";
-import { KeyDisplay } from "./loveComponents/utils";
-
 
 export default function Scene({ fromExperience, messege }) {
   console.log("fromExperience, messege----------", fromExperience, messege);
@@ -66,7 +64,7 @@ export default function Scene({ fromExperience, messege }) {
     Skybox(THREE, scene);
     scene.add(partclesMesh, heartMesh);
     TextMsg(THREE, scene, messege);
-   
+
     // const loader = new GLTFLoader(loadingManager);
 
     const loader = new GLTFLoader();

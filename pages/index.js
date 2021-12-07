@@ -1,7 +1,6 @@
-import Head from "next/head";
-import Layout from "./components/Layout";
-import Main from "./components/Main";
-
+import Layout from "../components/Layout";
+import Main from "../components/Main";
+import React from "react";
 export default function Home() {
   return (
     <>
