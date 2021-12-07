@@ -180,7 +180,7 @@ const Main = (props) => {
       {/*==================== MESSAGE ====================*/}
       <section className="message section container">
         <div className="message__container grid">
-          <form action className="message__form">
+          <form action="true" className="message__form">
             <h2 className="message__title">
               Send Good <br /> Wishes!
             </h2>
