@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
+import * as THREE from "three";
 import Link from "next/link";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
+// import { FontLoader } from "../node_modules/three/examples/jsm/loaders/FontLoader";
+// import { GUI } from "three/examples/jsm/libs/dat.gui.module";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import DonaldCanvas from "./homeComponent/donald";
 
 const Main = (props) => {
   useEffect(() => {
@@ -22,12 +28,20 @@ const Main = (props) => {
       },
     });
   }, []);
+
+  let canvasStyle = {
+    width: "100%",
+    height: "100%",
+    display: "block",
+    // backgroundColor: "#bfe3dd",
+  };
   return (
     <main className="main">
       {/*==================== HOME ====================*/}
       <section className="home" id="home">
         <div className="home__container container grid">
-          <img src="assets/img/home.png" alt="" className="home__img" />
+          {/* <img src="assets/img/home.png" alt="" className="home__img" /> */}
+          <DonaldCanvas></DonaldCanvas>
           <div className="home__data">
             <h1 className="home__title">
               Merry Christmas and <br /> Happy New Year!

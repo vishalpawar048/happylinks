@@ -21,7 +21,7 @@ export default function Model() {
   async function save() {
     let id = await saveExperiences(msg, "love");
     setExperienceId(id);
-    setUrlToShare(`${window.location.href}/experience/${id}`);
+    setUrlToShare(`${window.location.href}/experience?id=${id}`);
     console.log("process.env.PUBLIC_URL", window.location.href, id);
   }
 

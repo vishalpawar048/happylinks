@@ -22,7 +22,6 @@ import TextMsg from "../../../components/loveComponents/Text";
 // import MaleCharacter from "./assets/MaleCharacter.glb";
 
 export default function Scene({ fromExperience, messege }) {
-  console.log("fromExperience, messege----------", fromExperience, messege);
   const scene = new THREE.Scene();
   const fov = 80;
   const aspect = 2; // the canvas default
@@ -32,8 +31,8 @@ export default function Scene({ fromExperience, messege }) {
   camera.position.set(20, 2, 0);
   camera.rotateY = 100;
   useEffect(() => {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
+    // var w = window.innerWidth;
+    // var h = window.innerHeight;
     const canvas = document.querySelector("#canvas");
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.outputEncoding = THREE.sRGBEncoding;
