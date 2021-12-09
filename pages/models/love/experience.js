@@ -22,5 +22,5 @@ export default function Experience() {
     }
     getExperiencesData(id);
   }, [id]);
-  return <Scene messege={messege}></Scene>;
+  return <Scene type={"Experience"} messege={messege}></Scene>;
 }

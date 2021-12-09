@@ -6,7 +6,7 @@ import Particles from "../../../components/loveComponents/Particles";
 import Skybox from "../../../components/loveComponents/Skybox";
 import TextMsg from "../../../components/loveComponents/Text";
 
-export default function Scene({ messege }) {
+export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
   const scene = new THREE.Scene();
   const fov = 80;
@@ -127,15 +127,24 @@ export default function Scene({ messege }) {
     }
   }, [messege]);
 
-  let canvasStyle = {
+  let modelStyle = {
     width: "100%",
-    height: deviceHeight + "px",
-    // display: "block",
+    height: deviceHeight - 100 + "px",
     backgroundColor: "#bfe3dd",
   };
+
+  let experienceStyle = {
+    width: "100%",
+    height: deviceHeight + "px",
+    backgroundColor: "#bfe3dd",
+  };
+
   return (
     <div className="love">
-      <canvas id="canvas" style={canvasStyle} />
+      <canvas
+        id="canvas"
+        style={type == "model" ? modelStyle : experienceStyle}
+      />
     </div>
   );
 }
