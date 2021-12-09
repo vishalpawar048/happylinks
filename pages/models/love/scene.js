@@ -51,6 +51,7 @@ export default function Scene({ fromExperience, messege }) {
     orbitControls.minDistance = 5;
     orbitControls.maxDistance = 15;
     orbitControls.enablePan = false;
+    orbitControls.enableZoom = false;
     orbitControls.maxPolarAngle = Math.PI / 2 - 0.05;
     orbitControls.update();
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
