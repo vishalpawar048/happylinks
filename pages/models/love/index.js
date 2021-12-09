@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Scene from "./scene";
-import { useRouter } from "next/router";
-import { set } from "date-fns";
 import Link from "next/link";
-import { getExperiences, saveExperiences } from "../../../service/experience";
+import { saveExperiences } from "../../../service/experience";
 
 export default function Model() {
   console.log("In Model");
