@@ -42,7 +42,7 @@ export default function Model() {
                 id="nme"
                 value={msg}
                 onChange={(e) => setmsg(e.target.value)}
-                autocomplete="off"
+                // autocomplete="off"
               />
               {/* <label for="nme">
                 <span>What's your name?</span>
@@ -72,15 +72,15 @@ export default function Model() {
           {experienceId ? (
             <div>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <div class="clipboardContainer">
-                  <div id="inviteCode" class="invite-page">
+                <div className="clipboardContainer">
+                  <div id="inviteCode" className="invite-page">
                     <input
                       id="link"
                       value="https://staging.revolutioncredit.com/signupc/VprfEgvNdGuDLdAWBqi7iWAFoxKKpg_yg0hqNGBd2PU?eTypeId=44"
                     ></input>
-                    <div id="copy">
+                    {/* <div id="copy">
                       <ContentCopyIcon></ContentCopyIcon>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
