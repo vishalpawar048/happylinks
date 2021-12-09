@@ -1,27 +1,13 @@
 import * as THREE from "three";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-// import { FontLoader } from "../node_modules/three/examples/jsm/loaders/FontLoader";
-// import { GUI } from "three/examples/jsm/libs/dat.gui.module";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-
-// import cake from "./assets/cake3d.glb";
-// import donald from "./assets/donald.glb";
-// import plane from "./assets/plane.glb";
 import Particles from "../../../components/loveComponents/Particles";
 import Skybox from "../../../components/loveComponents/Skybox";
-// import heart from "./assets/heart.glb";
-import Plane from "../../../components/loveComponents/Plane";
-// import Drawer from "./components/Drawer";
 import TextMsg from "../../../components/loveComponents/Text";
-// import loadingManager from "./components/Loader";
 
-// import CharacterControls from "../../../components/loveComponents/components/Character";
-// import MaleCharacter from "./assets/MaleCharacter.glb";
-
-export default function Scene({ fromExperience, messege }) {
+export default function Scene({ messege }) {
+  const [deviceHeight, setdeviceHeight] = useState("");
   const scene = new THREE.Scene();
   const fov = 80;
   const aspect = 2; // the canvas default
@@ -31,8 +17,10 @@ export default function Scene({ fromExperience, messege }) {
   camera.position.set(20, 2, 0);
   camera.rotateY = 100;
   useEffect(() => {
-    // var w = window.innerWidth;
-    // var h = window.innerHeight;
+    var w = window.innerWidth;
+
+    var h = window.innerHeight;
+    setdeviceHeight(h);
     const canvas = document.querySelector("#canvas");
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.outputEncoding = THREE.sRGBEncoding;
@@ -141,8 +129,8 @@ export default function Scene({ fromExperience, messege }) {
 
   let canvasStyle = {
     width: "100%",
-    height: "100%",
-    display: "block",
+    height: deviceHeight + "px",
+    // display: "block",
     backgroundColor: "#bfe3dd",
   };
   return (

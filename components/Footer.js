@@ -6,9 +6,9 @@ const Footer = (props) => {
       <footer className="footer section">
         <div className="footer__container container grid">
           <div>
-            <a href="#" className="footer__logo">
+            <a href="/" className="footer__logo">
               <img
-                src="assets/img/logo.png"
+                src="/assets/img/logo.png"
                 alt=""
                 className="footer__logo-img"
               />
@@ -62,19 +62,19 @@ const Footer = (props) => {
             <h3 className="footer__title">Available On</h3>
             <div className="footer__aviables">
               <img
-                src="assets/img/aviable1.png"
+                src="/assets/img/aviable1.png"
                 alt=""
                 className="footer__aviable-img"
               />
               <img
-                src="assets/img/aviable2.png"
+                src="/assets/img/aviable2.png"
                 alt=""
                 className="footer__aviable-img"
               />
             </div>
           </div>
-          <img src="assets/img/footer1.png" alt="" className="footer__img1" />
-          <img src="assets/img/footer2.png" alt="" className="footer__img2" />
+          <img src="/assets/img/footer1.png" alt="" className="footer__img1" />
+          <img src="/assets/img/footer2.png" alt="" className="footer__img2" />
         </div>
         <span className="footer__copy">© Bedimcode. All rigths reserved</span>
       </footer>
