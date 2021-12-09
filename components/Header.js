@@ -40,18 +40,19 @@ const Header = (props) => {
               </a>
             </li>
             <li className="nav__item">
-              <a href="#celebrate" className="nav__link">
-                Celebrate
+              <a href="#experiences" className="nav__link">
+                Experiences
               </a>
             </li>
+
             <li className="nav__item">
-              <a href="#gift" className="nav__link">
-                Gifts
+              <a href="#submit-assets" className="nav__link">
+                Submit Assets
               </a>
             </li>
             <li className="nav__item">
               <a href="#new" className="nav__link">
-                New
+                About Us
               </a>
             </li>
           </ul>

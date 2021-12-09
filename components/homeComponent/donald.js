@@ -25,6 +25,7 @@ const DonaldCanvas = (props) => {
     orbitControls.minDistance = 5;
     orbitControls.maxDistance = 15;
     orbitControls.enablePan = false;
+    orbitControls.enableZoom = false;
     // orbitControls.maxPolarAngle = Math.PI / 2 - 0.05;
     orbitControls.update();
 
@@ -93,9 +94,9 @@ const DonaldCanvas = (props) => {
         donaldDanceMixer.update(delta);
       }
 
-    //   if (heartMixer) {
-    //     heartMixer.update(delta * 0.25);
-    //   }
+      //   if (heartMixer) {
+      //     heartMixer.update(delta * 0.25);
+      //   }
       orbitControls.update();
       renderer.render(scene, camera);
       window.requestAnimationFrame(render);

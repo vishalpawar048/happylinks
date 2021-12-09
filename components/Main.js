@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import * as THREE from "three";
 import Link from "next/link";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
-// import { FontLoader } from "../node_modules/three/examples/jsm/loaders/FontLoader";
-// import { GUI } from "three/examples/jsm/libs/dat.gui.module";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
 import DonaldCanvas from "./homeComponent/donald";
+// import Experience from "../pages/models/love/experience";
+import dynamic from "next/dynamic";
+import LoveBanner from "./homeComponent/loveBanner";
+
+const Experience = dynamic(() => import("../pages/models/love/experience"), {
+  loading: () => <p>...</p>,
+});
 
 const Main = (props) => {
   useEffect(() => {
@@ -44,20 +47,21 @@ const Main = (props) => {
           <DonaldCanvas></DonaldCanvas>
           <div className="home__data">
             <h1 className="home__title">
-              Merry Christmas and <br /> Happy New Year!
+              Experience 3D <br /> With bruhh!..
             </h1>
             <p className="home__description">
-              Christmas and a new year is about to begin, all good wishes and
-              successes.
+              {/* Christmas and a new year is about to begin, all good wishes and
+              successes. */}
+              Celebrate beautiful moments in 3D
             </p>
-            <a href="#" className="button">
-              Get Started
+            <a href="#experiences" className="button">
+              Wish Someone
             </a>
           </div>
         </div>
       </section>
       {/*==================== GIVING ====================*/}
-      <section className="giving section container">
+      {/* <section className="giving section container">
         <h2 className="section__title">
           Start Giving This <br /> Christmas
         </h2>
@@ -82,43 +86,32 @@ const Main = (props) => {
             </p>
           </div>
         </div>
-      </section>
-      {/*==================== CELEBRATE ====================*/}
-      <section className="celebrate section container" id="celebrate">
-        <div className="celebrate__container grid">
-          <div className="celebrate__data">
-            <h2 className="section__title celebrate__title">
-              Celebrate With A <br /> Lot Of Love
-            </h2>
-            <p className="celebrate__description">
-              In this holidays, celebrate with much love and peace, offering
-              many blessings to our loved ones, friends and neighbors, wishing
-              them a good Christmas message.
-            </p>
-            <a href="#" className="button">
-              Send Good Wishes
-            </a>
-          </div>
-          <img
-            src="assets/img/celebrate.png"
-            alt=""
-            className="celebrate__img"
-          />
-        </div>
-      </section>
+      </section> */}
+
       {/*==================== GIFT ====================*/}
-      <section className="gift section container" id="gift">
-        <h2 className="section__title">Share A Gift</h2>
+      <section className="gift section container" id="experiences">
+        <h2 className="section__title">Experiences</h2>
         <div className="gift__container grid">
-          <Link href="/models/love">
-            <article className="gift__card">
-              <img src="assets/img/gift1.png" alt="" className="gift__img" />
-              <i className="bx bx-heart gift__icon" />
-              <h3 className="gift__price">$15</h3>
-              <span className="gift__title">Gingerbread</span>
-            </article>
-          </Link>
-          <article className="gift__card">
+          <div>
+            <Link href="/models/love">
+              <article className="gift__card">
+                {/* <img src="assets/love/display.png" alt="" className="gift__img" /> */}
+                <video
+                  style={{ width: "100%", borderRadius: "inherit" }}
+                  autoPlay
+                  muted
+                  loop
+                >
+                  <source src="assets/love/video.mp4" type="video/mp4"></source>
+                </video>
+              </article>
+            </Link>
+            <p className="model__description">
+              Show your GF how much you love her. Add your personal messege and
+              send her own webpage.
+            </p>
+          </div>
+          {/* <article className="gift__card">
             <img src="assets/img/gift2.png" alt="" className="gift__img" />
             <i className="bx bx-heart gift__icon" />
             <h3 className="gift__price">$22</h3>
@@ -142,24 +135,47 @@ const Main = (props) => {
             <h3 className="gift__price">$12</h3>
             <span className="gift__title">Candy Stick</span>
           </article>
+          <article className="gift__card">
+            <img src="assets/img/gift2.png" alt="" className="gift__img" />
+            <i className="bx bx-heart gift__icon" />
+            <h3 className="gift__price">$22</h3>
+            <span className="gift__title">Santa Claus Hat</span>
+          </article> */}
         </div>
       </section>
       {/*==================== NEW ====================*/}
       <section className="new section container" id="new">
-        <h2 className="section__title">New Gifts</h2>
+        <h2 className="section__title">New Experiences</h2>
         <div className="new__container">
           <div className="swiper new-swiper">
             <div className="swiper-wrapper">
-              <article className="new__card swiper-slide">
-                <div className="new__overlay" />
-                <img src="assets/img/new1.png" alt="" className="new__img" />
-                <h3 className="new__price">$95</h3>
-                <span className="new__title">Reindeer</span>
-                <button className="button new__button">
-                  <i className="bx bx-heart new__icon" />
-                </button>
-              </article>
-              <article className="new__card swiper-slide">
+              <Link href="/models/love">
+                <article className="new__card swiper-slide">
+                  {/* <div className="new__overlay" /> */}
+                  <video
+                    style={{ width: "100%", objectFit: "fill" }}
+                    autoPlay
+                    muted
+                    loop
+                  >
+                    <source
+                      src="assets/love/video.mp4"
+                      type="video/mp4"
+                    ></source>
+                  </video>
+                  {/* <img src="assets/img/new1.png" alt="" className="new__img" /> */}
+                  <h3 className="new__price">$Free</h3>
+                  <span className="new__title">
+                    Show your GF how much you love her. Add your personal
+                    messege and send her own webpage.
+                  </span>
+                  {/* <button className="button new__button">
+                    <i className="bx bx-heart new__icon" />
+                  </button> */}
+                </article>
+              </Link>
+
+              {/* <article className="new__card swiper-slide">
                 <div className="new__overlay" />
                 <img src="assets/img/new2.png" alt="" className="new__img" />
                 <h3 className="new__price">$20</h3>
@@ -185,10 +201,33 @@ const Main = (props) => {
                 <button className="button new__button">
                   <i className="bx bx-heart new__icon" />
                 </button>
-              </article>
+              </article> */}
             </div>
             <div className="swiper-pagination" />
           </div>
+        </div>
+      </section>
+      {/*==================== CELEBRATE ====================*/}
+      <section className="celebrate section container" id="submit-assets">
+        <div className="celebrate__container grid">
+          <div className="celebrate__data">
+            <h2 className="section__title celebrate__title">
+              Celebrate With A <br /> Lot Of Love
+            </h2>
+            <p className="celebrate__description">
+              In this holidays, celebrate with much love and peace, offering
+              many blessings to our loved ones, friends and neighbors, wishing
+              them a good Christmas message.
+            </p>
+            <a href="#" className="button">
+              Send Good Wishes
+            </a>
+          </div>
+          <img
+            src="assets/img/celebrate.png"
+            alt=""
+            className="celebrate__img"
+          />
         </div>
       </section>
       {/*==================== MESSAGE ====================*/}

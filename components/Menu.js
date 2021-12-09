@@ -8,9 +8,7 @@ const Menu = (props) => {
 
   function closeNav() {
     setopen("0px");
-    // if (process.browser) {
-    //   document.getElementById("mySidenav").style.width = "0";
-    // }
+ 
   }
   return (
     <>

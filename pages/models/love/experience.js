@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Scene from "./scene";
 import { useRouter } from "next/router";
-import { set } from "date-fns";
 import { getExperiences } from "../../../service/experience";
 
 export default function Experience() {
@@ -17,6 +16,8 @@ export default function Experience() {
         console.log("messege", data.messege);
 
         setMessege(data.messege);
+      } else {
+        setMessege("Hello");
       }
     }
     getExperiencesData(id);
