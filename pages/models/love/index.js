@@ -103,6 +103,7 @@ export default function Model() {
                       id="link"
                       value={urlToShare}
                       onClick={copyToClip}
+                      readOnly
                     ></input>
                     <Snackbar
                       anchorOrigin={{ vertical, horizontal }}
