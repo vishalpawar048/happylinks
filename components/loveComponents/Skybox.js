@@ -1,7 +1,4 @@
-
-import loadingManager from "./Loader";
-
-export default function Skybox(THREE, scene) {
+export default function Skybox(THREE, scene, loadingManager) {
   const loader = new THREE.CubeTextureLoader(loadingManager);
   const posx = "/assets/love/Skyboxs/posx.jpg";
   const negx = "/assets/love/Skyboxs/negx.jpg";

@@ -2,15 +2,11 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import DonaldCanvas from "./homeComponent/donald";
 // import Experience from "../pages/models/love/experience";
 import dynamic from "next/dynamic";
 import LoveBanner from "./homeComponent/loveBanner";
-
-const Experience = dynamic(() => import("../pages/models/love/experience"), {
-  loading: () => <p>...</p>,
-});
 
 const Main = (props) => {
   useEffect(() => {
@@ -47,7 +43,7 @@ const Main = (props) => {
           <DonaldCanvas></DonaldCanvas>
           <div className="home__data">
             <h1 className="home__title">
-              Experience 3D <br /> With bruhh!..
+              Wish in 3D <br /> With bruhh!..
             </h1>
             <p className="home__description">
               {/* Christmas and a new year is about to begin, all good wishes and
@@ -98,6 +94,8 @@ const Main = (props) => {
                 {/* <img src="assets/love/display.png" alt="" className="gift__img" /> */}
                 <video
                   style={{ width: "100%", borderRadius: "inherit" }}
+                  poster="assets/img/loader.gif"
+                  preload="auto"
                   autoPlay
                   muted
                   loop

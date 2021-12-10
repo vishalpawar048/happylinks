@@ -5,6 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Particles from "../../../components/loveComponents/Particles";
 import Skybox from "../../../components/loveComponents/Skybox";
 import TextMsg from "../../../components/loveComponents/Text";
+import LoadingManager from "../../../components/common/loadingManager";
 
 export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
@@ -42,6 +43,23 @@ export default function Scene({ type, messege }) {
     orbitControls.enableZoom = false;
     orbitControls.maxPolarAngle = Math.PI / 2 - 0.05;
     orbitControls.update();
+
+    // const loadingManager = new THREE.LoadingManager(() => {
+    //   const loadingScreen = document.getElementById("loading-screen");
+    //   loadingScreen ? loadingScreen.classList.add("fade-out") : "";
+
+    //   loadingScreen
+    //     ? loadingScreen.addEventListener("transitionend", onTransitionEnd)
+    //     : "";
+    // });
+
+    // function onTransitionEnd(event) {
+    //   const element = event.target;
+    //   element.remove();
+    // }
+
+    const loadingManager = LoadingManager(document);
+
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
@@ -49,13 +67,13 @@ export default function Scene({ type, messege }) {
     scene.add(directionalLight);
     // Plane(THREE, scene);
     let { partclesMesh, heartMesh } = Particles(THREE);
-    Skybox(THREE, scene);
+    Skybox(THREE, scene, loadingManager);
     scene.add(partclesMesh, heartMesh);
-    TextMsg(THREE, scene, messege);
+    TextMsg(THREE, scene, messege, loadingManager);
 
     // const loader = new GLTFLoader(loadingManager);
 
-    const loader = new GLTFLoader();
+    const loader = new GLTFLoader(loadingManager);
 
     loader.load(
       "/assets/love/heart.glb",
@@ -141,6 +159,9 @@ export default function Scene({ type, messege }) {
 
   return (
     <div className="love">
+      <section id="loading-screen">
+        <div id="loader"></div>
+      </section>
       <canvas
         id="canvas"
         style={type == "model" ? modelStyle : experienceStyle}

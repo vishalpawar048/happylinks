@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import LoadingManager from "../common/loadingManager";
 
 const DonaldCanvas = (props) => {
   useEffect(() => {
@@ -31,7 +32,8 @@ const DonaldCanvas = (props) => {
 
     let donaldDanceMixer;
     let heartMixer;
-    const loader = new GLTFLoader();
+    const loadingManager = LoadingManager(document);
+    const loader = new GLTFLoader(loadingManager);
     renderer.outputEncoding = THREE.sRGBEncoding;
     // const axesHelper = new THREE.AxesHelper();
     // scene.add(axesHelper);
@@ -129,6 +131,9 @@ const DonaldCanvas = (props) => {
   };
   return (
     <div className="homeCanvas1">
+      <section id="loading-screen">
+        <div id="loader"></div>
+      </section>
       <canvas id="homeCanvas" style={canvasStyle} />
     </div>
   );

@@ -49,9 +49,7 @@ const Header = (props) => {
             </li>
 
             <li className="nav__item">
-              <a href="#submit-assets" className="nav__link">
-                Submit Assets
-              </a>
+              <Link href="/#submit-assets">Submit Assets</Link>
             </li>
             <li className="nav__item">
               <a href="#new" className="nav__link">

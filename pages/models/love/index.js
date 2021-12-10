@@ -3,6 +3,7 @@ import Scene from "./scene";
 import Link from "next/link";
 import { saveExperiences } from "../../../service/experience";
 import Layout from "../../../components/Layout";
+import Snackbar from "@mui/material/Snackbar";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 export default function Model() {
@@ -10,6 +11,30 @@ export default function Model() {
   const [finalMsg, setfinalMsg] = useState("Happy Birthday Sweetheart...");
   const [urlToShare, setUrlToShare] = useState("");
   const [experienceId, setExperienceId] = useState("");
+  // const [copySuccess, setCopySuccess] = useState("");
+
+  const [copySuccess, setCopySuccess] = useState({
+    open: false,
+    vertical: "bottom",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, open } = copySuccess;
+  // const textAreaRef = useRef(null);
+
+  async function copyToClip() {
+    setCopySuccess({
+      open: true,
+      vertical: "bottom",
+      horizontal: "center",
+    });
+    // console.log("newState", newState);
+    await navigator.clipboard.writeText(urlToShare);
+    // setCopySuccess("Copied");
+  }
+
+  const handleClose = () => {
+    setCopySuccess({ ...copySuccess, open: false });
+  };
 
   function applyText(msg) {
     setfinalMsg(msg);
@@ -42,7 +67,7 @@ export default function Model() {
                 id="nme"
                 value={msg}
                 onChange={(e) => setmsg(e.target.value)}
-                // autocomplete="off"
+                autoComplete="off"
               />
               {/* <label for="nme">
                 <span>What's your name?</span>
@@ -55,7 +80,7 @@ export default function Model() {
                 required
                 autocomplete="off"
               ></textarea> */}
-              <label for="msg">
+              <label htmlFor="msg">
                 <span>What's your message?</span>
               </label>
             </div>
@@ -76,11 +101,17 @@ export default function Model() {
                   <div id="inviteCode" className="invite-page">
                     <input
                       id="link"
-                      value="https://staging.revolutioncredit.com/signupc/VprfEgvNdGuDLdAWBqi7iWAFoxKKpg_yg0hqNGBd2PU?eTypeId=44"
+                      value={urlToShare}
+                      onClick={copyToClip}
                     ></input>
-                    {/* <div id="copy">
-                      <ContentCopyIcon></ContentCopyIcon>
-                    </div> */}
+                    <Snackbar
+                      anchorOrigin={{ vertical, horizontal }}
+                      open={open}
+                      onClose={handleClose}
+                      message="URL Copied!"
+                      key={vertical + horizontal}
+                    />
+                    {/* {copySuccess ? <div id="copy"></div> : null} */}
                   </div>
                 </div>
               </div>
