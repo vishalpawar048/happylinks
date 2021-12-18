@@ -105,8 +105,9 @@ const Main = (props) => {
               </article>
             </Link>
             <p className="model__description">
-              Show your GF how much you love her. Add your personal messege and
-              send her own webpage.
+              Share the Romantic Experience to your Sweetheart. Add your
+              personal messege, send them a their personal 3D experience webpage
+              link and make them feel special.
             </p>
           </div>
           {/* <article className="gift__card">
@@ -164,8 +165,9 @@ const Main = (props) => {
                   {/* <img src="assets/img/new1.png" alt="" className="new__img" /> */}
                   <h3 className="new__price">$Free</h3>
                   <span className="new__title">
-                    Show your GF how much you love her. Add your personal
-                    messege and send her own webpage.
+                    Share the Romantic Experience to your Sweetheart. Add your
+                    personal messege, send them a personal Experience webpage
+                    link and make them feel special.
                   </span>
                   {/* <button className="button new__button">
                     <i className="bx bx-heart new__icon" />
