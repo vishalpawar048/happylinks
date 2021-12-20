@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { useEffect, useState } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -55,7 +56,7 @@ export default function Scene({ type, messege }) {
     let { partclesMesh, heartMesh } = Particles(THREE);
     Skybox(THREE, scene, loadingManager);
     scene.add(partclesMesh, heartMesh);
-    // TextMsg(THREE, scene, messege, loadingManager);
+    TextMsg(THREE, scene, messege, loadingManager);
 
     // const loader = new GLTFLoader(loadingManager);
 

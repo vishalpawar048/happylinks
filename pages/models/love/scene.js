@@ -69,7 +69,8 @@ export default function Scene({ type, messege }) {
     let { partclesMesh, heartMesh } = Particles(THREE);
     Skybox(THREE, scene, loadingManager);
     scene.add(partclesMesh, heartMesh);
-    TextMsg(THREE, scene, messege, loadingManager);
+    // TextMsg(THREE, scene, messege, loadingManager);
+    TextMsg(THREE, scene, w, messege);
 
     // const loader = new GLTFLoader(loadingManager);
 
