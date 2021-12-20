@@ -7,6 +7,7 @@ import Skybox from "../../../components/loveComponents/Skybox";
 import TextMsg from "../../../components/loveComponents/Text";
 import LoadingManager from "../../../components/common/loadingManager";
 import HeartText from "../../../components/loveComponents/HeartText";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
@@ -26,6 +27,14 @@ export default function Scene({ type, messege }) {
   // const color = 0xffffff;
   // const density = 0.05;
   // scene.fog = new THREE.FogExp2(color, density);
+  function handleScroll() {
+    console.log("document.body.offsetHeight", document.body.offsetHeight);
+    window.scroll({
+      top: 500,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
   useEffect(() => {
     var w = window.innerWidth;
 
@@ -177,6 +186,17 @@ export default function Scene({ type, messege }) {
         id="canvas"
         style={type == "model" ? modelStyle : experienceStyle}
       />
+      <KeyboardArrowDownIcon
+        style={{
+          fontSize: "50px",
+          color: "#fff",
+          bottom: "50px",
+          left: 0,
+          position: "absolute",
+          width: "100%",
+        }}
+        onClick={handleScroll}
+      ></KeyboardArrowDownIcon>
     </div>
   );
 }
