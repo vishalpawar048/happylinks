@@ -6,6 +6,7 @@ import Particles from "../../../components/loveComponents/Particles";
 import Skybox from "../../../components/loveComponents/Skybox";
 import TextMsg from "../../../components/loveComponents/Text";
 import LoadingManager from "../../../components/common/loadingManager";
+import HeartText from "../../../components/loveComponents/HeartText";
 
 export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
@@ -17,6 +18,14 @@ export default function Scene({ type, messege }) {
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.set(20, 2, 0);
   camera.rotateY = 100;
+  // const near = 1;
+  // const far = 2;
+  // const color = "red";
+  // scene.fog = new THREE.Fog(color, near, far);
+  // scene.background = new THREE.Color(color);
+  // const color = 0xffffff;
+  // const density = 0.05;
+  // scene.fog = new THREE.FogExp2(color, density);
   useEffect(() => {
     var w = window.innerWidth;
 
@@ -70,7 +79,8 @@ export default function Scene({ type, messege }) {
     Skybox(THREE, scene, loadingManager);
     scene.add(partclesMesh, heartMesh);
     // TextMsg(THREE, scene, messege, loadingManager);
-    TextMsg(THREE, scene, w, messege);
+    // TextMsg(THREE, scene, w, messege);
+    HeartText(THREE, scene, w, messege);
 
     // const loader = new GLTFLoader(loadingManager);
 

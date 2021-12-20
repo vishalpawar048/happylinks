@@ -40,7 +40,7 @@ const Main = (props) => {
       <section className="home" id="home">
         <div className="home__container container grid">
           {/* <img src="assets/img/home.png" alt="" className="home__img" /> */}
-          <DonaldCanvas></DonaldCanvas>
+          {/* <DonaldCanvas></DonaldCanvas> */}
           <div className="home__data">
             <h1 className="home__title">
               Wish in 3D <br /> With bruhh!..
@@ -92,7 +92,7 @@ const Main = (props) => {
             <Link href="/models/love">
               <article className="gift__card">
                 {/* <img src="assets/love/display.png" alt="" className="gift__img" /> */}
-                <video
+                {/* <video
                   style={{ width: "100%", borderRadius: "inherit" }}
                   poster="assets/img/loader.gif"
                   preload="auto"
@@ -100,8 +100,13 @@ const Main = (props) => {
                   muted
                   loop
                 >
-                  <source src="assets/love/video.mp4" type="video/mp4"></source>
-                </video>
+                                    <source src="assets/love/video.mp4" type="video/mp4"></source>
+                                    </video> */}
+                <img
+                  src="assets/love/display.png"
+                  alt=""
+                  className="gift__img"
+                />
               </article>
             </Link>
             <p className="model__description">
@@ -151,17 +156,11 @@ const Main = (props) => {
               <Link href="/models/love">
                 <article className="new__card swiper-slide">
                   {/* <div className="new__overlay" /> */}
-                  <video
-                    style={{ width: "100%", objectFit: "fill" }}
-                    autoPlay
-                    muted
-                    loop
-                  >
-                    <source
-                      src="assets/love/video.mp4"
-                      type="video/mp4"
-                    ></source>
-                  </video>
+                  <img
+                    src="assets/love/display.png"
+                    alt=""
+                    className="gift__img"
+                  />
                   {/* <img src="assets/img/new1.png" alt="" className="new__img" /> */}
                   <h3 className="new__price">$Free</h3>
                   <span className="new__title">

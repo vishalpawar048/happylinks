@@ -17,9 +17,11 @@
     }
   }
   &__img {
-    width: 100px;
+    width: 100%;
     justify-self: center;
-    margin-bottom: var(--mb-0-25);
+    border-radius: inherit;
+
+    // margin-bottom: var(--mb-0-25);
     transition: 0.3s;
   }
   &__icon {
