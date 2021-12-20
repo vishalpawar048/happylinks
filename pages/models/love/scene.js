@@ -8,6 +8,8 @@ import TextMsg from "../../../components/loveComponents/Text";
 import LoadingManager from "../../../components/common/loadingManager";
 import HeartText from "../../../components/loveComponents/HeartText";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import fullScreen from "../../../components/common/fullScreen";
 
 export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
@@ -34,6 +36,10 @@ export default function Scene({ type, messege }) {
       left: 0,
       behavior: "smooth",
     });
+  }
+
+  function handleFullscreen() {
+    fullScreen(window);
   }
   useEffect(() => {
     var w = window.innerWidth;
@@ -189,7 +195,7 @@ export default function Scene({ type, messege }) {
       <KeyboardArrowDownIcon
         style={{
           fontSize: "50px",
-          color: "#fff",
+          color: "gray",
           bottom: "50px",
           left: 0,
           position: "absolute",
@@ -197,6 +203,16 @@ export default function Scene({ type, messege }) {
         }}
         onClick={handleScroll}
       ></KeyboardArrowDownIcon>
+      <FullscreenIcon
+        style={{
+          fontSize: "50px",
+          color: "gray",
+          bottom: "50px",
+          right: "20px",
+          position: "absolute",
+        }}
+        onClick={handleFullscreen}
+      ></FullscreenIcon>
     </div>
   );
 }
