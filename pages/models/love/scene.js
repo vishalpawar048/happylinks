@@ -10,6 +10,7 @@ import HeartText from "../../../components/loveComponents/HeartText";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import fullScreen from "../../../components/common/fullScreen";
+import NeonBalls from "../../../components/common/neonBalls";
 
 export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
@@ -21,14 +22,7 @@ export default function Scene({ type, messege }) {
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.set(20, 2, 0);
   camera.rotateY = 100;
-  // const near = 1;
-  // const far = 2;
-  // const color = "red";
-  // scene.fog = new THREE.Fog(color, near, far);
-  // scene.background = new THREE.Color(color);
-  // const color = 0xffffff;
-  // const density = 0.05;
-  // scene.fog = new THREE.FogExp2(color, density);
+
   function handleScroll() {
     console.log("document.body.offsetHeight", document.body.offsetHeight);
     window.scroll({
@@ -47,7 +41,7 @@ export default function Scene({ type, messege }) {
     var h = window.innerHeight;
     setdeviceHeight(h);
     const canvas = document.querySelector("#canvas");
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.outputEncoding = THREE.sRGBEncoding;
 
     let planeMixer;
@@ -96,6 +90,7 @@ export default function Scene({ type, messege }) {
     // TextMsg(THREE, scene, messege, loadingManager);
     // TextMsg(THREE, scene, w, messege);
     HeartText(THREE, scene, w, messege);
+    let bloomComposer = NeonBalls(THREE, scene, camera, renderer, window);
 
     // const loader = new GLTFLoader(loadingManager);
 
@@ -134,7 +129,7 @@ export default function Scene({ type, messege }) {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       const delta = clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
-
+      bloomComposer.render(scene, camera);
       if (donaldDanceMixer) {
         donaldDanceMixer.update(delta);
       }
@@ -147,7 +142,8 @@ export default function Scene({ type, messege }) {
       partclesMesh.position.y = -elapsedTime;
       heartMesh.position.y = -elapsedTime;
       orbitControls.update();
-      renderer.render(scene, camera);
+      bloomComposer.render(scene, camera);
+      // renderer.render(scene, camera);
       window.requestAnimationFrame(render);
 
       if (resizeRendererToDisplaySize(renderer)) {
@@ -155,6 +151,7 @@ export default function Scene({ type, messege }) {
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
       }
+      camera.layers.set(0);
     };
     function resizeRendererToDisplaySize(renderer) {
       const canvas = renderer.domElement;
