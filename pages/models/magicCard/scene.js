@@ -1,5 +1,4 @@
 import * as THREE from "three";
-
 import { useEffect, useState } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -7,6 +6,11 @@ import Particles from "../../../components/loveComponents/Particles";
 import Skybox from "../../../components/loveComponents/Skybox";
 import TextMsg from "../../../components/loveComponents/Text";
 import LoadingManager from "../../../components/common/loadingManager";
+import HeartText from "../../../components/loveComponents/HeartText";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import fullScreen from "../../../components/common/fullScreen";
+import NeonBalls from "../../../components/common/neonBalls";
 
 export default function Scene({ type, messege }) {
   const [deviceHeight, setdeviceHeight] = useState("");
@@ -18,13 +22,26 @@ export default function Scene({ type, messege }) {
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.set(20, 2, 0);
   camera.rotateY = 100;
+
+  function handleScroll() {
+    console.log("document.body.offsetHeight", document.body.offsetHeight);
+    window.scroll({
+      top: 500,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function handleFullscreen() {
+    fullScreen(window);
+  }
   useEffect(() => {
     var w = window.innerWidth;
 
     var h = window.innerHeight;
     setdeviceHeight(h);
     const canvas = document.querySelector("#canvas");
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.outputEncoding = THREE.sRGBEncoding;
 
     let planeMixer;
@@ -38,12 +55,26 @@ export default function Scene({ type, messege }) {
     // CONTROLS
     const orbitControls = new OrbitControls(camera, renderer.domElement);
     orbitControls.enableDamping = true;
-    // orbitControls.minDistance = 5;
-    // orbitControls.maxDistance = 15;
+    orbitControls.minDistance = 5;
+    orbitControls.maxDistance = 15;
     orbitControls.enablePan = false;
-    // orbitControls.enableZoom = false;
+    orbitControls.enableZoom = false;
     orbitControls.maxPolarAngle = Math.PI / 2 - 0.05;
     orbitControls.update();
+
+    // const loadingManager = new THREE.LoadingManager(() => {
+    //   const loadingScreen = document.getElementById("loading-screen");
+    //   loadingScreen ? loadingScreen.classList.add("fade-out") : "";
+
+    //   loadingScreen
+    //     ? loadingScreen.addEventListener("transitionend", onTransitionEnd)
+    //     : "";
+    // });
+
+    // function onTransitionEnd(event) {
+    //   const element = event.target;
+    //   element.remove();
+    // }
 
     const loadingManager = LoadingManager(document);
 
@@ -56,30 +87,30 @@ export default function Scene({ type, messege }) {
     let { partclesMesh, heartMesh } = Particles(THREE);
     Skybox(THREE, scene, loadingManager);
     scene.add(partclesMesh, heartMesh);
-    TextMsg(THREE, scene, messege, loadingManager);
+    // TextMsg(THREE, scene, messege, loadingManager);
+    // TextMsg(THREE, scene, w, messege);
+    HeartText(THREE, scene, w, messege);
+    // let bloomComposer = NeonBalls(THREE, scene, camera, renderer, window);
 
     // const loader = new GLTFLoader(loadingManager);
 
     const loader = new GLTFLoader(loadingManager);
 
     loader.load(
-      "/assets/flower/flower.glb",
+      "/assets/love/heart.glb",
       function (gltf) {
-        console.log("-------gltf", gltf);
         let model = gltf.scene;
         model.position.set(0, -5, 0);
         renderer.outputEncoding = true;
-        gltf.scene.scale.set(50, 50, 50);
+        gltf.scene.scale.set(100, 100, 100);
         // const listener = new THREE.AudioListener();
         // camera.add(listener);
         scene.add(model);
         heartMixer = new THREE.AnimationMixer(model);
-        console.log("heartMixer", gltf.animations);
         heartMixer.clipAction(gltf.animations[0]).play();
         // addDonald();
         // addPlane();
-        render();
-        // messege && render();
+        messege && render();
       },
       function (progress) {
         // console.log("% loaded", xhr);
@@ -99,8 +130,14 @@ export default function Scene({ type, messege }) {
       const delta = clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
 
+      if (donaldDanceMixer) {
+        donaldDanceMixer.update(delta);
+      }
+      if (planeMixer) {
+        planeMixer.update(delta);
+      }
       if (heartMixer) {
-        heartMixer.update(delta);
+        heartMixer.update(delta * 0.25);
       }
       partclesMesh.position.y = -elapsedTime;
       heartMesh.position.y = -elapsedTime;
@@ -113,6 +150,7 @@ export default function Scene({ type, messege }) {
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
       }
+      camera.layers.set(0);
     };
     function resizeRendererToDisplaySize(renderer) {
       const canvas = renderer.domElement;
@@ -124,9 +162,10 @@ export default function Scene({ type, messege }) {
       }
       return needResize;
     }
-
-    render();
-  }, []);
+    if (messege) {
+      render();
+    }
+  }, [messege]);
 
   let modelStyle = {
     width: "100%",
@@ -149,6 +188,27 @@ export default function Scene({ type, messege }) {
         id="canvas"
         style={type == "model" ? modelStyle : experienceStyle}
       />
+      <KeyboardArrowDownIcon
+        style={{
+          fontSize: "50px",
+          color: "gray",
+          bottom: "50px",
+          left: 0,
+          position: "absolute",
+          width: "100%",
+        }}
+        onClick={handleScroll}
+      ></KeyboardArrowDownIcon>
+      <FullscreenIcon
+        style={{
+          fontSize: "50px",
+          color: "gray",
+          bottom: "50px",
+          right: "20px",
+          position: "absolute",
+        }}
+        onClick={handleFullscreen}
+      ></FullscreenIcon>
     </div>
   );
 }

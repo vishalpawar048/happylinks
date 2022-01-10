@@ -90,7 +90,7 @@ export default function Scene({ type, messege }) {
     // TextMsg(THREE, scene, messege, loadingManager);
     // TextMsg(THREE, scene, w, messege);
     HeartText(THREE, scene, w, messege);
-    let bloomComposer = NeonBalls(THREE, scene, camera, renderer, window);
+    // let bloomComposer = NeonBalls(THREE, scene, camera, renderer, window);
 
     // const loader = new GLTFLoader(loadingManager);
 
@@ -129,7 +129,7 @@ export default function Scene({ type, messege }) {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       const delta = clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
-      bloomComposer.render(scene, camera);
+
       if (donaldDanceMixer) {
         donaldDanceMixer.update(delta);
       }
@@ -142,8 +142,7 @@ export default function Scene({ type, messege }) {
       partclesMesh.position.y = -elapsedTime;
       heartMesh.position.y = -elapsedTime;
       orbitControls.update();
-      bloomComposer.render(scene, camera);
-      // renderer.render(scene, camera);
+      renderer.render(scene, camera);
       window.requestAnimationFrame(render);
 
       if (resizeRendererToDisplaySize(renderer)) {
