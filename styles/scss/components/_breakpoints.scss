@@ -44,7 +44,8 @@
   }
 
   .footer__container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
   }
 }
 
@@ -82,7 +83,7 @@
   .home__container,
   .celebrate__container,
   .message__container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     align-items: center;
   }
 
@@ -119,7 +120,8 @@
   }
 
   .footer__container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
   }
 }
 
@@ -216,8 +218,9 @@
 
   .footer {
     &__container {
-      grid-template-columns: repeat(4, max-content);
-      justify-content: space-between;
+      grid-template-columns: repeat(1, max-content);
+      // justify-content: space-between;
+      justify-content: center;
     }
     &__copy {
       margin-top: 7rem;

@@ -30,7 +30,7 @@ const Header = (props) => {
       <nav className="nav container">
         <a href="/" className="nav__logo">
           <img src="/assets/love/heart.png" alt="" className="nav__logo-img" />
-          bruhh...
+          bruhh..
         </a>
 
         <div className="nav__menu" id="nav-menu">
@@ -48,14 +48,14 @@ const Header = (props) => {
               </Link>
             </li>
 
-            <li className="nav__item">
+            {/* <li className="nav__item">
               <Link href="/#submit-assets">Submit Assets</Link>
-            </li>
-            <li className="nav__item">
+            </li> */}
+            {/* <li className="nav__item">
               <a href="#new" className="nav__link">
                 About Us
               </a>
-            </li>
+            </li> */}
           </ul>
 
           <div className="nav__close" id="nav-close">

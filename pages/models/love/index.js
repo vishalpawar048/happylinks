@@ -11,6 +11,7 @@ export default function Model() {
   const [finalMsg, setfinalMsg] = useState("Happy Birthday Sweetheart...");
   const [urlToShare, setUrlToShare] = useState("");
   const [experienceId, setExperienceId] = useState("");
+  const [loadingUrl, setloadingUrl] = useState(false);
   // const [copySuccess, setCopySuccess] = useState("");
 
   const [copySuccess, setCopySuccess] = useState({
@@ -41,9 +42,11 @@ export default function Model() {
   }
 
   async function save() {
+    setloadingUrl(true);
     let id = await saveExperiences(msg, "love");
     setExperienceId(id);
     setUrlToShare(`${window.location.href}/experience?id=${id}`);
+    setloadingUrl(false);
     console.log("process.env.PUBLIC_URL", window.location.href, id);
   }
 
@@ -85,19 +88,27 @@ export default function Model() {
               </label>
             </div>
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <button className="button button3d" onClick={() => applyText(msg)}>
               Apply
             </button>
             <button className="button button3d" onClick={() => save()}>
               Save
             </button>
+            {loadingUrl ? <div className="loading"></div> : ""}
           </div>
 
           {experienceId ? (
             <div>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <div className="clipboardContainer">
+                  <div>Click here to copy the link</div>
                   <div id="inviteCode" className="invite-page">
                     <input
                       id="link"

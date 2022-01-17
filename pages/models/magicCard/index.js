@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm//postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm//postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
-// import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -17,14 +16,7 @@ const straightnoise =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/straightnoise.webp";
 const water =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/water.webp";
-const pokeball =
-  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/ball3.glb";
-const pokelogo =
-  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/log2.glb";
-const charmodel =
-  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/char8.glb";
-const rocks =
-  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/rocks12.glb";
+
 const borderFront =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/fontborder.png";
 const borderBack =
@@ -34,7 +26,8 @@ const rampimg =
 const rampimg2 =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/ramp11.webp";
 const demo =
-  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/demo5-min.png";
+  "https://raw.githubusercontent.com/vishalpawar048/bruhhAssests/main/transperentBg.png";
+// https://raw.githubusercontent.com/vishalpawar048/bruhhAssests/main/transperentBg.png
 const color3 =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/color3.webp";
 const lavamap =
@@ -47,6 +40,16 @@ const lavaocc =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/Lava/Lava_001_OCC.webp";
 const lavaspec =
   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/Lava/Lava_001_SPEC.webp";
+
+// glb
+const pokeball =
+  "https://raw.githubusercontent.com/vishalpawar048/bruhhAssests/main/rose.glb";
+// const pokelogo =
+//   "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/log2.glb";
+const charmodel =
+  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/char8.glb";
+const rocks =
+  "https://raw.githubusercontent.com/pizza3/asset/master/chaassets/rocks12.glb";
 
 const vert = `
   varying vec2 vUv;
@@ -512,6 +515,7 @@ export default function Model() {
         0.08,
         1000
       );
+      cameraRTT.layers.enable(1);
       cameraRTT.position.set(0, 0, 1.5);
 
       renderer = new THREE.WebGLRenderer({ antialias: true, autoSize: true });
@@ -576,99 +580,154 @@ export default function Model() {
       bloomComposer = new EffectComposer(renderer);
       bloomComposer.renderToScreen = false;
       bloomComposer.addPass(renderScene);
-      bloomComposer.addPass(bloomPass);
+      // bloomComposer.addPass(bloomPass);
     }
 
     function addFontCard() {
-      const loader = new GLTFLoader();
-      loader.load(charmodel, (gltf) => {
-        gltf.scene.traverse(function (node) {
-          if (node.isMesh) {
-            node.castShadow = true;
-          }
-        });
+      const gloader = new GLTFLoader();
+      const light = new THREE.AmbientLight(0x404040);
+      // soft white light
+      parentGroupFront.add(light);
+      const pointlight = new THREE.PointLight(0xff0000, 1, 100);
+      pointlight.position.set(50, 50, 50);
+      parentGroupFront.add(pointlight);
 
-        gltf.scene.scale.set(0.03, 0.03, 0.03);
-        gltf.scene.position.set(-0.35, -1.7, -1.2);
-        gltf.scene.rotation.set(0, Math.PI / 6, 0);
-
-        parentGroupFront.add(gltf.scene);
-
-        const geocyl = new THREE.CylinderBufferGeometry(
-          0.0008,
-          0.45,
-          7,
-          32,
-          64,
-          true
-        );
-        const mesh = new THREE.Mesh(geocyl, newMaterial5);
-        mesh.rotation.set(Math.PI / 1.6, Math.PI / 4.5, Math.PI / 1.6);
-        mesh.position.set(2.7, 2.3, 1.38);
-        mesh.scale.set(1, 1, 1);
-        parentGroupFront.add(mesh);
-
-        const geosphere = new THREE.SphereBufferGeometry(10, 32, 32);
-        const meshback = new THREE.Mesh(geosphere, newMaterial6);
-
-        parentGroupFront.add(meshback);
-
-        parentGroupFront.rotation.set(0, Math.PI, 0);
-        parentGroupFront.scale.set(0.75, 0.75, 0.75);
+      const geometry = new THREE.PlaneGeometry(1, 1);
+      var loader = new THREE.TextureLoader();
+      // const material = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+      var material = new THREE.MeshLambertMaterial({
+        // color: "yellow",
+        map: loader.load(
+          "https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg"
+        ),
+        side: THREE.DoubleSide,
       });
 
-      loader.load(rocks, (gltf) => {
-        rocksmat = new THREE.MeshStandardMaterial({
-          color: 0x666666,
-          map: new THREE.TextureLoader().load(lavamap),
-          normalMap: new THREE.TextureLoader().load(lavanormal),
-          normalScale: new THREE.Vector2(20, 20),
-          aoMap: new THREE.TextureLoader().load(lavaocc),
-          aoMapIntensity: 1,
-          displacementMap: new THREE.TextureLoader().load(lavadisplacement),
-          displacementScale: 0.1,
-          lightMap: new THREE.TextureLoader().load(lavaspec),
-          // metalness: 0.1,
-          // lightMapIntensity: 0.01,
-        });
-
-        rocksmat.onBeforeCompile = (shader) => {
-          shaderRockCtx = shader;
-          shader.uniforms = {
-            ...shader.uniforms,
-            time: { type: "f", value: 0.0 },
-          };
-
-          shader.fragmentShader = `
-          uniform float time; 
-          float map2(float value, float min1, float max1, float min2, float max2) {
-            return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
-          }
-      
-        ${shader.fragmentShader}`;
-
-          shader.fragmentShader = shader.fragmentShader.replace(
-            "#include <dithering_fragment>",
-            `
-          #include <dithering_fragment>
-          vec4 color = gl_FragColor;
-  
-          if(color.r>=0.3 && color.r!=color.g){
-            gl_FragColor *= map2(sin(time/1.3),-1.,1.,0.7,1.9);
-          }
-          `
-          );
-        };
-
-        gltf.scene.traverse(function (node) {
-          if (node.isMesh) node.material = rocksmat;
-        });
-
-        gltf.scene.rotation.set(0, -Math.PI / 1.5, 0);
-        gltf.scene.scale.set(1.2, 1.2, 1.2);
-        gltf.scene.position.set(3, -4.85, -7);
-        parentGroupFront.add(gltf.scene);
+      const cube = new THREE.Mesh(geometry, material);
+      parentGroupFront.add(cube);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      scene.add(directionalLight);
+      gloader.load(pokeball, function (result) {
+        // result.scene.scale.set(0.27, 0.28, 0.28);
+        result.scene.scale.set(0.007, 0.008, 0.008);
+        result.scene.rotation.set(-Math.PI / 8, 0, 0);
+        // result.scene.position.set(-0.01, -0.02, -0.15);
+        result.scene.position.set(-0.02, -1, 0.3);
+        console.log(result);
+        scene.add(result.scene);
       });
+      // // Create a texture loader so we can load our image file
+      // var loader = new THREE.TextureLoader();
+
+      // // Load an image file into a custom material
+      // // new THREE.MeshBasicMaterial( { color: "black" } )
+
+      // var material = new THREE.MeshLambertMaterial({
+      //   // color: "yellow",
+      //   map: loader.load(
+      //     "https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg"
+      //   ),
+      // });
+
+      // var geometry = new THREE.PlaneGeometry(100, 100 * 0.75);
+
+      // // combine our image geometry and material into a mesh
+      // var mesh = new THREE.Mesh(geometry, material);
+      // // mesh.layers.enable(0);
+
+      // mesh.rotation.set(Math.PI / 1, Math.PI / 2, Math.PI / 1);
+      // mesh.position.set(-0.35, -1.7, -5);
+      // // add the image to the scene
+      // parentGroupFront.add(mesh);
+
+      // loader.load(charmodel, (gltf) => {
+      //   gltf.scene.traverse(function (node) {
+      //     if (node.isMesh) {
+      //       node.castShadow = true;
+      //     }
+      //   });
+
+      //   gltf.scene.scale.set(0.03, 0.03, 0.03);
+      //   gltf.scene.position.set(-0.35, -1.7, -1.2);
+      //   gltf.scene.rotation.set(0, Math.PI / 6, 0);
+
+      //   parentGroupFront.add(gltf.scene);
+
+      //   // const geocyl = new THREE.CylinderBufferGeometry(
+      //   //   0.0008,
+      //   //   0.45,
+      //   //   7,
+      //   //   32,
+      //   //   64,
+      //   //   true
+      //   // );
+      //   // const mesh = new THREE.Mesh(geocyl, newMaterial5);
+      //   // mesh.rotation.set(Math.PI / 1.6, Math.PI / 4.5, Math.PI / 1.6);
+      //   // mesh.position.set(2.7, 2.3, 1.38);
+      //   // mesh.scale.set(1, 1, 1);
+      //   // parentGroupFront.add(mesh);
+
+      //   // const geosphere = new THREE.SphereBufferGeometry(10, 32, 32);
+      //   // const meshback = new THREE.Mesh(geosphere, newMaterial6);
+
+      //   // parentGroupFront.add(meshback);
+
+      //   parentGroupFront.rotation.set(0, Math.PI, 0);
+      //   parentGroupFront.scale.set(0.75, 0.75, 0.75);
+      // });
+
+      // loader.load(rocks, (gltf) => {
+      //   rocksmat = new THREE.MeshStandardMaterial({
+      //     color: 0x666666,
+      //     map: new THREE.TextureLoader().load(lavamap),
+      //     normalMap: new THREE.TextureLoader().load(lavanormal),
+      //     normalScale: new THREE.Vector2(20, 20),
+      //     aoMap: new THREE.TextureLoader().load(lavaocc),
+      //     aoMapIntensity: 1,
+      //     displacementMap: new THREE.TextureLoader().load(lavadisplacement),
+      //     displacementScale: 0.1,
+      //     lightMap: new THREE.TextureLoader().load(lavaspec),
+      //     // metalness: 0.1,
+      //     // lightMapIntensity: 0.01,
+      //   });
+
+      //   rocksmat.onBeforeCompile = (shader) => {
+      //     shaderRockCtx = shader;
+      //     shader.uniforms = {
+      //       ...shader.uniforms,
+      //       time: { type: "f", value: 0.0 },
+      //     };
+
+      //     shader.fragmentShader = `
+      //     uniform float time;
+      //     float map2(float value, float min1, float max1, float min2, float max2) {
+      //       return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+      //     }
+
+      //   ${shader.fragmentShader}`;
+
+      //     shader.fragmentShader = shader.fragmentShader.replace(
+      //       "#include <dithering_fragment>",
+      //       `
+      //     #include <dithering_fragment>
+      //     vec4 color = gl_FragColor;
+
+      //     if(color.r>=0.3 && color.r!=color.g){
+      //       gl_FragColor *= map2(sin(time/1.3),-1.,1.,0.7,1.9);
+      //     }
+      //     `
+      //     );
+      //   };
+
+      //   gltf.scene.traverse(function (node) {
+      //     if (node.isMesh) node.material = rocksmat;
+      //   });
+
+      //   gltf.scene.rotation.set(0, -Math.PI / 1.5, 0);
+      //   gltf.scene.scale.set(1.2, 1.2, 1.2);
+      //   gltf.scene.position.set(3, -4.85, -7);
+      //   parentGroupFront.add(gltf.scene);
+      // });
     }
 
     function sceneLights() {
@@ -779,24 +838,26 @@ export default function Model() {
     function models() {
       const gloader = new GLTFLoader();
       gloader.load(pokeball, function (result) {
-        result.scene.scale.set(0.27, 0.28, 0.28);
+        // result.scene.scale.set(0.27, 0.28, 0.28);
+        result.scene.scale.set(0.007, 0.008, 0.008);
         result.scene.rotation.set(-Math.PI / 8, 0, 0);
-        result.scene.position.set(-0.01, -0.02, -0.15);
+        // result.scene.position.set(-0.01, -0.02, -0.15);
+        result.scene.position.set(-0.02, -1, 0.3);
         ballGroup.add(result.scene);
       });
 
-      gloader.load(pokelogo, (gltf) => {
-        let obj = new THREE.Object3D();
-        obj.add(gltf.scene);
-        obj.position.set(-0.13, 0.3, -0.3);
-        obj.scale.set(0.23, 0.23, 0.23);
-        parentGroupBack.add(obj);
+      // gloader.load(pokelogo, (gltf) => {
+      //   let obj = new THREE.Object3D();
+      //   obj.add(gltf.scene);
+      //   obj.position.set(-0.13, 0.3, -0.3);
+      //   obj.scale.set(0.23, 0.23, 0.23);
+      //   parentGroupBack.add(obj);
 
-        let obj2 = new THREE.Object3D();
-        obj2.add(obj.clone());
-        obj2.rotation.set(0, 0, Math.PI);
-        parentGroupBack.add(obj2);
-      });
+      //   let obj2 = new THREE.Object3D();
+      //   obj2.add(obj.clone());
+      //   obj2.rotation.set(0, 0, Math.PI);
+      //   parentGroupBack.add(obj2);
+      // });
     }
     function mesh() {
       const geometry = new THREE.SphereBufferGeometry(
@@ -1211,6 +1272,7 @@ export default function Model() {
       pointmesh.scale.set(0.14, 0.14, 0.14);
       pointmesh.rotation.set(0, Math.PI / 2, 0);
       pointmesh.position.set(0, 0, -1);
+      pointmesh.layers.enable(1);
       parentGroupFront.add(pointmesh);
       sceneRTT.add(parentGroupFront);
     }
@@ -1270,14 +1332,23 @@ export default function Model() {
       requestAnimationFrame(animate);
       updateDraw(delta);
       controls.update();
-      // matrix.makeRotationY(-(clock.getDelta() * 0.7 * Math.PI) / period);
-      // camera.position.applyMatrix4(matrix);
-      // camera.lookAt(frontcard.position);
 
       renderer.clear();
       bloomComposer.render();
       renderer.render(scene, camera);
+
+      // renderer.autoClear = false;
+      // renderer.clear();
+
+      // cameraRTT.layers.set(1);
+      // bloomComposer.render();
+
+      // renderer.clearDepth();
+      // cameraRTT.layers.set(0);
+      // postProc();
+      // renderer.render(scene, camera);
     }
+
     let prevAngle = "";
     function onPositionChange(o) {
       var vector = new THREE.Vector3(0, 0, 0);

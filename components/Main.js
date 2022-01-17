@@ -42,13 +42,11 @@ const Main = (props) => {
           {/* <img src="assets/img/home.png" alt="" className="home__img" /> */}
           {/* <DonaldCanvas></DonaldCanvas> */}
           <div className="home__data">
-            <h1 className="home__title">
-              Wish in 3D <br /> With bruhh!..
-            </h1>
+            <h1 className="home__title">Wish your love in 3D Experiences.</h1>
             <p className="home__description">
               {/* Christmas and a new year is about to begin, all good wishes and
               successes. */}
-              Celebrate beautiful moments in 3D
+              VR and AR experiences comming soon..
             </p>
             <a href="#experiences" className="button">
               Wish Someone
@@ -84,24 +82,14 @@ const Main = (props) => {
         </div>
       </section> */}
 
-      {/*==================== GIFT ====================*/}
+      {/* Middle Banners */}
       <section className="gift section container" id="experiences">
         <h2 className="section__title">Experiences</h2>
         <div className="gift__container grid">
+          {/* Heart Love 3d Experience */}
           <div>
             <Link href="/models/love">
               <article className="gift__card">
-                {/* <img src="assets/love/display.png" alt="" className="gift__img" /> */}
-                {/* <video
-                  style={{ width: "100%", borderRadius: "inherit" }}
-                  poster="assets/img/loader.gif"
-                  preload="auto"
-                  autoPlay
-                  muted
-                  loop
-                >
-                                    <source src="assets/love/video.mp4" type="video/mp4"></source>
-                                    </video> */}
                 <img
                   src="assets/love/display.png"
                   alt=""
@@ -110,9 +98,41 @@ const Main = (props) => {
               </article>
             </Link>
             <p className="model__description">
-              Share the Romantic Experience to your Sweetheart. Add your
-              personal messege, send them a their personal 3D experience webpage
-              link and make them feel special.
+              Share the Romantic Experience to your Love. Add your a personal
+              messege, send them a experience link and make them feel special.
+            </p>
+          </div>
+
+          {/* Valentine Magic Card */}
+          <div>
+            <Link href="/">
+              <article className="gift__card">
+                <img
+                  src="images/coming-soon.jpeg"
+                  alt=""
+                  className="gift__img"
+                />
+              </article>
+            </Link>
+            <p className="model__description">
+              Share a 3D magic Pokemon card with your personal message, photo
+              and AR experience.
+            </p>
+          </div>
+
+          <div>
+            <Link href="/">
+              <article className="gift__card">
+                <img
+                  src="images/coming-soon.jpeg"
+                  alt=""
+                  className="gift__img"
+                />
+              </article>
+            </Link>
+            <p className="model__description">
+              AR experience with a heart with snowfall and neon light. The
+              experience can be shareable with your presonal message.
             </p>
           </div>
           {/* <article className="gift__card">
@@ -207,7 +227,7 @@ const Main = (props) => {
         </div>
       </section>
       {/*==================== CELEBRATE ====================*/}
-      <section className="celebrate section container" id="submit-assets">
+      {/* <section className="celebrate section container" id="submit-assets">
         <div className="celebrate__container grid">
           <div className="celebrate__data">
             <h2 className="section__title celebrate__title">
@@ -228,9 +248,9 @@ const Main = (props) => {
             className="celebrate__img"
           />
         </div>
-      </section>
+      </section> */}
       {/*==================== MESSAGE ====================*/}
-      <section className="message section container">
+      {/* <section className="message section container">
         <div className="message__container grid">
           <form action="true" className="message__form">
             <h2 className="message__title">
@@ -245,7 +265,7 @@ const Main = (props) => {
           </form>
           <img src="assets/img/message.png" alt="" className="message__img" />
         </div>
-      </section>
+      </section> */}
     </main>
   );
 };

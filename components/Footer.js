@@ -5,7 +5,7 @@ const Footer = (props) => {
     <>
       <footer className="footer section">
         <div className="footer__container container grid">
-          <div>
+          {/* <div>
             <a href="/" className="footer__logo">
               <img
                 src="/assets/img/logo.png"
@@ -17,8 +17,8 @@ const Footer = (props) => {
             <p className="footer__description">
               This Christmas give <br /> a lot of love
             </p>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <h3 className="footer__title">Our Services</h3>
             <ul className="footer__links">
               <li>
@@ -37,28 +37,36 @@ const Footer = (props) => {
                 </a>
               </li>
             </ul>
-          </div>
-          <div>
-            <h3 className="footer__title">Support</h3>
+          </div> */}
+          <div style={{ disply: "flex", justifyContent: "center" }}>
+            <h3 className="footer__title">Connect With Us</h3>
             <ul className="footer__links">
               <li>
-                <a href="#" className="footer__link">
-                  FAQs
+                <a
+                  href="https://www.instagram.com/bruhh_vr"
+                  target="_blank"
+                  className="footer__link"
+                >
+                  Instagram
                 </a>
               </li>
               <li>
-                <a href="#" className="footer__link">
-                  Support center
+                <a
+                  href="https://www.facebook.com/Bruhh-100311925896073"
+                  target="_blank"
+                  className="footer__link"
+                >
+                  Facebook
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="footer__link">
                   Contact Us
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h3 className="footer__title">Available On</h3>
             <div className="footer__aviables">
               <img
@@ -72,11 +80,11 @@ const Footer = (props) => {
                 className="footer__aviable-img"
               />
             </div>
-          </div>
+          </div> */}
           <img src="/assets/img/footer1.png" alt="" className="footer__img1" />
           <img src="/assets/img/footer2.png" alt="" className="footer__img2" />
         </div>
-        <span className="footer__copy">© Bedimcode. All rigths reserved</span>
+        <span className="footer__copy">© bruhh.io All rigths reserved</span>
       </footer>
     </>
   );

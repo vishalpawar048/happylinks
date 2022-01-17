@@ -62,20 +62,6 @@ export default function Scene({ type, messege }) {
     orbitControls.maxPolarAngle = Math.PI / 2 - 0.05;
     orbitControls.update();
 
-    // const loadingManager = new THREE.LoadingManager(() => {
-    //   const loadingScreen = document.getElementById("loading-screen");
-    //   loadingScreen ? loadingScreen.classList.add("fade-out") : "";
-
-    //   loadingScreen
-    //     ? loadingScreen.addEventListener("transitionend", onTransitionEnd)
-    //     : "";
-    // });
-
-    // function onTransitionEnd(event) {
-    //   const element = event.target;
-    //   element.remove();
-    // }
-
     const loadingManager = LoadingManager(document);
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
