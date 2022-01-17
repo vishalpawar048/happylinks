@@ -157,16 +157,23 @@ export default function Scene({ type, messege }) {
     width: "100%",
     height: deviceHeight - 100 + "px",
     backgroundColor: "#bfe3dd",
+    overflow: "hidden",
   };
 
   let experienceStyle = {
     width: "100%",
+
     height: deviceHeight + "px",
     backgroundColor: "#bfe3dd",
+    overflow: "hidden",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    outline: "none",
   };
 
   return (
-    <div className="love">
+    <div className="love" style={{ overflow: "hidden" }}>
       <section id="loading-screen">
         <div id="loader"></div>
       </section>
@@ -174,17 +181,19 @@ export default function Scene({ type, messege }) {
         id="canvas"
         style={type == "model" ? modelStyle : experienceStyle}
       />
-      <KeyboardArrowDownIcon
-        style={{
-          fontSize: "50px",
-          color: "gray",
-          bottom: "50px",
-          left: 0,
-          position: "absolute",
-          width: "100%",
-        }}
-        onClick={handleScroll}
-      ></KeyboardArrowDownIcon>
+      {type == "model" ? (
+        <KeyboardArrowDownIcon
+          style={{
+            fontSize: "50px",
+            color: "gray",
+            bottom: "50px",
+            left: 0,
+            position: "absolute",
+            width: "100%",
+          }}
+          onClick={handleScroll}
+        ></KeyboardArrowDownIcon>
+      ) : null}
       <FullscreenIcon
         style={{
           fontSize: "50px",

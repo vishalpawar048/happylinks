@@ -17,7 +17,7 @@ export default function Experience() {
 
         setMessege(data.messege);
       } else {
-        setMessege("Hello");
+        // setMessege("");
       }
     }
     getExperiencesData(id);
